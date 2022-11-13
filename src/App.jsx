@@ -53,7 +53,7 @@ export default () => {
 					<input type="text" className="px-2 py-1 focus:outline-none w-full" placeholder="Find note"/>
 				</form>
 			</header>
-			<div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 p-8">
+			<div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 p-4">
 				<NewCard addCard={addCard}></NewCard>
 				{cards.map(card => (
 					<Card removeCard={removeCard} updateCard={updateCard} id={card.id} title={card.title} text={card.text}></Card>
