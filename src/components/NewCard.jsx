@@ -38,6 +38,7 @@ export default (props) => {
             <TextArea reference={text} placeholder="New note"></TextArea>
             <div className='flex justify-end gap-4'>
                 <Icon onClick={copyText} className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="clarity:copy-line"></Icon>
+                <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="ic:round-format-color-text"></Icon>
                 <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="carbon:color-palette"></Icon>
                 <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' onClick={addCard} icon="akar-icons:arrow-down"></Icon>
             </div>

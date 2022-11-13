@@ -49,7 +49,7 @@ export default () => {
 		<main>
 			<header className="border-b border-gray-300 p-2 flex justify-start">
 				<form className="flex items-center w-full text-gray-700 text-xl border border-gray-300 rounded pl-2">
-					<Icon icon="charm:search"></Icon>
+					<Icon className="text-gray-600" icon="charm:search"></Icon>
 					<input type="text" className="px-2 py-1 focus:outline-none w-full" placeholder="Find note"/>
 				</form>
 			</header>

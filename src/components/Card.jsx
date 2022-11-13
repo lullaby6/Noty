@@ -34,6 +34,7 @@ export default (props) => {
             </div>
             <div className='flex justify-end gap-4'>
                 <Icon onClick={copyText} className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="clarity:copy-line"></Icon>
+                <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="ic:round-format-color-text"></Icon>
                 <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="carbon:color-palette"></Icon>
                 <Icon onClick={removeCard} className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="ph:trash-bold"></Icon>
             </div>
