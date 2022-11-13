@@ -16,6 +16,6 @@ export default ({value, placeholder, reference, onChange}) => {
     useEffect(() => updateHeight());
 
     return (
-        <textarea ref={reference} onChange={e => omChangeTextArea(e)} placeholder={placeholder} defaultValue={value} className="text-md focus:outline-none resize-none overflow-hidden" ></textarea>
+        <textarea ref={reference} onChange={e => omChangeTextArea(e)} placeholder={placeholder} defaultValue={value} className="text-md focus:outline-none resize-none overflow-hidden max-h-64" ></textarea>
     )
 }
