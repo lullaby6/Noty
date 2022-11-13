@@ -24,6 +24,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 # if you are deploying to https://lucianobrumer.github.io/Noty
-# git push -f git@github.com:lucianobrumer/Noty.git main:gh-pages
+git push -f git@github.com:lucianobrumer/Noty.git main:gh-pages
 
 cd -
