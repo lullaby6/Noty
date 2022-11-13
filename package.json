@@ -2,7 +2,7 @@
   "name": "noty",
   "private": true,
   "version": "0.0.0",
-  "homepage": "http://lucianobrumer.github.io/Noty",
+  "homepage": "https://lucianobrumer.github.io/Noty",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
