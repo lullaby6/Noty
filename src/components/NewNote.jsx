@@ -8,20 +8,20 @@ export default (props) => {
     const text = useRef('')
     const [reload, setReload] = useState(false)
 
-    function clearCard(){
+    function clearNote(){
         title.current.value = ''
         text.current.value = ''
         setReload(!reload)
     }
 
-    function addCard(){
+    function addNote(){
         if(title.current.value.trim() != '' || text.current.value.trim() != ''){
-            props.addCard({
+            props.addNote({
                 title: title.current.value,
                 text: text.current.value,
             })
 
-            clearCard()
+            clearNote()
         }
     }
 
@@ -32,15 +32,15 @@ export default (props) => {
     }
 
     return (
-        <div className="break-inside-avoid-column border border-gray-300 gap-2 p-2 flex flex-col text-gray-700 relative mb-4">
-            <Icon onClick={clearCard} className="cursor-pointer absolute text-gray-400 hover:text-gray-700 text-xl top-0 right-0 m-1" icon="eva:close-fill"/>
+        <div className="break-inside-avoid-column shadow-md border border-gray-300 gap-2 p-2 flex flex-col text-gray-700 relative mb-4">
+            <Icon onClick={clearNote} className="cursor-pointer absolute text-gray-400 hover:text-gray-700 text-xl top-0 right-0 m-1" icon="eva:close-fill"/>
             <input ref={title} className="text-lg focus:outline-none font-semibold" type="text" name="" id="" placeholder="Title" />
             <TextArea reference={text} placeholder="New note"></TextArea>
             <div className='flex justify-end gap-4'>
                 <Icon onClick={copyText} className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="clarity:copy-line"></Icon>
                 <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="ic:round-format-color-text"></Icon>
                 <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' icon="carbon:color-palette"></Icon>
-                <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' onClick={addCard} icon="akar-icons:arrow-down"></Icon>
+                <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-md' onClick={addNote} icon="akar-icons:arrow-down"></Icon>
             </div>
         </div>
     )

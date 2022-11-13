@@ -2,26 +2,26 @@ import { useState, useEffect } from "react"
 import { v4 as uuidv4 } from "uuid";
 import {Icon} from '@iconify/react'
 
-import Card from "./components/Card"
-import NewCard from "./components/NewCard"
+import Note from "./components/Note"
+import NewNote from "./components/NewNote";
 
 export default () => {
-	const [cards, setCards] = useState(() => {
-		let cards = []
+	const [notes, setNotes] = useState(() => {
+		let notes = []
 		let noty = JSON.parse(localStorage.getItem('noty'))
 
 		try {
-			if('cards' in noty){
-				cards = noty.cards
+			if('notes' in noty){
+				notes = noty.notes
 			}
 		} catch (error) {}
 
-		return cards
+		return notes
 	})
 
-	function addCard({title, text}){
-        setCards([
-            ...cards,
+	function addNote({title, text}){
+        setNotes([
+            ...notes,
             {
 				id: uuidv4(),
 				title,
@@ -30,19 +30,19 @@ export default () => {
         ])
     }
 
-	function removeCard(id){
-		setCards(cards.filter(card => card.id !== id))
+	function removeNote(id){
+		setNotes(notes.filter(note => note.id !== id))
 	}
 
-	function updateCard(updateCardProps){
-		setCards([
-			...cards.filter(card => card.id !== updateCardProps.id),
-			updateCardProps
+	function updateNote(updateNoteProps){
+		setNotes([
+			...notes.filter(note => note.id !== updateNoteProps.id),
+			updateNoteProps
 		])
 	}
 
 	useEffect(() => {
-		localStorage.setItem('noty', JSON.stringify({cards}))
+		localStorage.setItem('noty', JSON.stringify({notes}))
 	});
 
 	return (
@@ -54,9 +54,9 @@ export default () => {
 				</form>
 			</header>
 			<div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 p-4">
-				<NewCard addCard={addCard}></NewCard>
-				{cards.map(card => (
-					<Card removeCard={removeCard} updateCard={updateCard} id={card.id} title={card.title} text={card.text}></Card>
+				<NewNote addNote={addNote}></NewNote>
+				{notes.map(note => (
+					<Note removeNote={removeNote} updateNote={updateNote} id={note.id} title={note.title} text={note.text}></Note>
 				))}
 			</div>
 		</main>
