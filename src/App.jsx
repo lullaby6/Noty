@@ -56,7 +56,7 @@ export default () => {
 				</form>
 			</header>
 			<div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 p-4">
-				<NewNote addNote={addNote}></NewNote>
+				{search.trim() === '' && <NewNote addNote={addNote}></NewNote>}
 				{notes.map(note => {
 					if(search.trim() === ''){
 						return <Note removeNote={removeNote} updateNote={updateNote} id={note.id} title={note.title} text={note.text}></Note>
