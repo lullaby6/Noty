@@ -78,7 +78,7 @@ export default (props) => {
     return (
         <div ref={container} className="relative break-inside-avoid-column rounded shadow-md border border-gray-300 gap-2 p-2 flex flex-col mb-4 dark:bg-neutral-900 dark:border-none">
             <input ref={title} onChange={updateNote} className="text-xl md:text-lg placeholder:text-current placeholder:opacity-50 placeholder:italic focus:outline-none font-semibold bg-transparent" placeholder='Title' defaultValue={props.title}/>
-            <TextArea reference={text} onChange={updateNote} placeholder="Note" value={props.text}></TextArea>
+            <TextArea reference={text} onChange={updateNote} placeholder={props.add ? "New note" : "Note"} value={props.text}></TextArea>
             <div className='flex justify-end gap-4'>
                 <Icon onClick={copyText} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="clarity:copy-line"></Icon>
                 <div>
