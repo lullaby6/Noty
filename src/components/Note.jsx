@@ -1,23 +1,61 @@
 import { Icon } from '@iconify/react'
 import { HexColorPicker } from "react-colorful";
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 import TextArea from './TextArea'
 
 export default (props) => {
     const title = useRef('')
     const text = useRef('')
+    const [reload, setReload] = useState(false)
     const [showTextPalette, setShowTextPalette] = useState(false);
-    const [textColor, setTextColor] = useState('');
+    const [textColor, setTextColor] = useState(props.textColor || '');
     const [showBgPalette, setShowBgPalette] = useState(false);
-    const [bgColor, setBgColor] = useState('');
+    const [bgColor, setBgColor] = useState(props.bgColor || '');
+
+    const container = useRef('')
+
+    function clearNote(){
+        title.current.value = ''
+        text.current.value = ''
+        setBgColor('')
+        setTextColor('')
+        setShowBgPalette(false)
+        setShowTextPalette(false)
+        setReload(!reload)
+        container.current.style.backgroundColor = null
+        container.current.style.color = null
+    }
+
+    function addNote(){
+        if(title.current.value.trim() != '' || text.current.value.trim() != ''){
+            props.addNote({
+                title: title.current.value,
+                text: text.current.value,
+                bgColor,
+                textColor
+            })
+
+            clearNote()
+        }
+    }
 
     function removeNote(){
         props.removeNote(props.id)
     }
 
+    function updateBgColor(color){
+        setBgColor(color)
+        updateNote()
+    }
+
+    function updateTextColor(color){
+        setTextColor(color)
+        updateNote()
+    }
+
     function updateNote(){
-        props.updateNote({
+        if(!props.add) props.updateNote({
             id: props.id,
             title: title.current.value,
             text: text.current.value,
@@ -32,15 +70,36 @@ export default (props) => {
         )
     }
 
+    useEffect(() => {
+        if(bgColor && bgColor != '') container.current.style.backgroundColor = bgColor
+        if(textColor && textColor != '') container.current.style.color = textColor
+    });
+
     return (
-        <div className="break-inside-avoid-column rounded shadow-md border border-gray-300 gap-2 p-2 flex flex-col justify-between relative mb-4 dark:bg-neutral-900 dark:border-none">
-            <input ref={title} onChange={updateNote} className="text-xl md:text-lg focus:outline-none font-semibold bg-transparent dark:placeholder:text-neutral-500" placeholder='Title' defaultValue={props.title}/>
+        <div ref={container} className="relative break-inside-avoid-column rounded shadow-md border border-gray-300 gap-2 p-2 flex flex-col mb-4 dark:bg-neutral-900 dark:border-none">
+            <input ref={title} onChange={updateNote} className="text-xl md:text-lg placeholder:text-current placeholder:opacity-50 placeholder:italic focus:outline-none font-semibold bg-transparent" placeholder='Title' defaultValue={props.title}/>
             <TextArea reference={text} onChange={updateNote} placeholder="Note" value={props.text}></TextArea>
             <div className='flex justify-end gap-4'>
-                <Icon onClick={copyText} className='cursor-pointer text-gray-400 hover:text-gray-700 text-lg md:text-md dark:text-neutral-500 dark:hover:text-neutral-300' icon="clarity:copy-line"></Icon>
-                <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-lg md:text-md dark:text-neutral-500 dark:hover:text-neutral-300' icon="ic:round-format-color-text"></Icon>
-                <Icon className='cursor-pointer text-gray-400 hover:text-gray-700 text-lg md:text-md dark:text-neutral-500 dark:hover:text-neutral-300' icon="carbon:color-palette"></Icon>
-                <Icon onClick={removeNote} className='cursor-pointer text-gray-400 hover:text-gray-700 text-lg md:text-md dark:text-neutral-500 dark:hover:text-neutral-300' icon="ph:trash-bold"></Icon>
+                <Icon onClick={copyText} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="clarity:copy-line"></Icon>
+                <div>
+                    <Icon onClick={() => setShowTextPalette(!showTextPalette)} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="ic:round-format-color-text"></Icon>
+                    {showTextPalette && <div className='absolute z-10 left-0 top-0 aspect-square'>
+                        <HexColorPicker color={textColor} onChange={updateTextColor} />
+                    </div>}
+                </div>
+                <div>
+                    <Icon onClick={() => setShowBgPalette(!showBgPalette)} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="carbon:color-palette"></Icon>
+                    {showBgPalette && <div className='absolute z-10 left-0 top-0 aspect-square'>
+                        <HexColorPicker color={bgColor} onChange={updateBgColor} />
+                    </div>}
+                </div>
+                {props.add
+                    ? <>
+                        <Icon onClick={clearNote} className="cursor-pointer absolute text-2xl md:text-xl top-0 right-0 m-1 opacity-50 hover:opacity-100" icon="eva:close-fill"/>
+                        <Icon className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' onClick={addNote} icon="akar-icons:arrow-down"></Icon>
+                    </>
+                    :   <Icon onClick={removeNote} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="ph:trash-bold"></Icon>
+                }
             </div>
         </div>
     )
