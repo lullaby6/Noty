@@ -38,8 +38,9 @@ export default () => {
 	}
 
 	function updateNote(updateNoteProps){
+		console.log(updateNoteProps);
 		setNotes([
-			...notes.filter(note => note.id !== updateNoteProps.id),
+			...notes.filter(note => note.id != updateNoteProps.id),
 			updateNoteProps
 		])
 	}
