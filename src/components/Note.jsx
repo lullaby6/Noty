@@ -35,7 +35,6 @@ export default (props) => {
                 bgColor,
                 textColor
             })
-
             clearNote()
         }
     }

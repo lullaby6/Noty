@@ -34,15 +34,14 @@ export default () => {
     }
 
 	function removeNote(id){
-		setNotes(notes.filter(note => note.id !== id))
+		setNotes([...notes.filter(note => note.id !== id)])
 	}
 
 	function updateNote(updateNoteProps){
-		console.log(updateNoteProps);
-		setNotes([
-			...notes.filter(note => note.id != updateNoteProps.id),
-			updateNoteProps
-		])
+		const index = notes.findIndex(note => note.id === updateNoteProps.id)
+		let updatedNotes = [...notes]
+		updatedNotes[index] = updateNoteProps
+		setNotes(updatedNotes)
 	}
 
 	useEffect(() => {
@@ -56,7 +55,7 @@ export default () => {
 				{search.trim() === '' && <Note add={true} addNote={addNote}></Note>}
 				{notes.map(note => {
 					if(search.trim() === ''){
-						return <Note removeNote={removeNote} updateNote={updateNote} id={note.id} title={note.title} text={note.text} bgColor={note.bgColor} textColor={note.textColor}></Note>
+						return <Note key={note.id} removeNote={removeNote} updateNote={updateNote} id={note.id} title={note.title} text={note.text} bgColor={note.bgColor} textColor={note.textColor}></Note>
 					}else{
 						if(note.title.toLowerCase().includes(search.toLowerCase()) || note.text.toLowerCase().includes(search.toLowerCase())) return <Note removeNote={removeNote} updateNote={updateNote} id={note.id} title={note.title} text={note.text}></Note>
 					}
