@@ -72,7 +72,7 @@ export default (props) => {
     useEffect(() => {
         if(bgColor && bgColor != '') container.current.style.backgroundColor = bgColor
         if(textColor && textColor != '') container.current.style.color = textColor
-    }, []);
+    });
 
     return (
         <div ref={container} className="relative break-inside-avoid-column rounded shadow-md border border-gray-300 gap-2 p-2 flex flex-col mb-4 dark:bg-neutral-900 dark:border-none">

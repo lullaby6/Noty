@@ -13,7 +13,7 @@ export default ({value, placeholder, reference, onChange}) => {
         reference.current.style.height = reference.current.scrollHeight + "px"
     }
 
-    useEffect(() => updateHeight(), []);
+    useEffect(() => updateHeight());
 
     return <textarea ref={reference} onChange={e => omChangeTextArea(e)} placeholder={placeholder} defaultValue={value} className="text-lg focus:outline-none resize-none overflow-hidden max-h-64 bg-transparent placeholder:text-current placeholder:opacity-50 placeholder:italic"></textarea>
 }
