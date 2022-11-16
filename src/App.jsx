@@ -7,7 +7,17 @@ import Note from "./components/Note"
 
 export default () => {
 	const [search, setSearch] = useState('')
-	const [columns, setColumns] = useState(1)
+	const [columns, setColumns] = useState(() =>{
+		const width = window.innerWidth
+		if(width <= 480){
+			return 1
+		}else if(width <= 768){
+			return 2
+		}else if(width <= 1024){
+			return 3
+		}
+		return 4
+	})
 
 	const [notes, setNotes] = useState(() => {
 		let notes = []
@@ -58,9 +68,8 @@ export default () => {
 					return setColumns(2)
 				}else if(width <= 1024){
 					return setColumns(3)
-				}else{
-					return setColumns(4)
 				}
+				return setColumns(4)
 			}
 			window.addEventListener('resize', resize)
 			resize()
