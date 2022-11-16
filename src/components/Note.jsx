@@ -45,11 +45,13 @@ export default (props) => {
 
     function updateBgColor(color){
         setBgColor(color)
+        // setShowBgPalette(false)
         updateNote()
     }
 
     function updateTextColor(color){
         setTextColor(color)
+        // setShowTextPalette(false)
         updateNote()
     }
 
@@ -83,13 +85,13 @@ export default (props) => {
                 <div className='relative'>
                     <Icon onClick={() => setShowTextPalette(!showTextPalette)} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="ic:round-format-color-text"></Icon>
                     {showTextPalette && <div className='mt-6 absolute z-10 right-0 top-0 aspect-square'>
-                        <HexColorPicker color={textColor} onChange={updateTextColor} />
+                        <HexColorPicker onMouseUp={() => setShowTExtPalette(false)} color={textColor} onChange={updateTextColor} />
                     </div>}
                 </div>
                 <div className='relative'>
                     <Icon onClick={() => setShowBgPalette(!showBgPalette)} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="carbon:color-palette"></Icon>
                     {showBgPalette && <div className='mt-6 absolute z-10 right-0 top-0 aspect-square'>
-                        <HexColorPicker color={bgColor} onChange={updateBgColor} />
+                        <HexColorPicker onMouseUp={() => setShowBgPalette(false)} color={bgColor} onChange={updateBgColor} />
                     </div>}
                 </div>
                 {props.add
