@@ -61,7 +61,6 @@ export default () => {
 				}else{
 					return setColumns(1)
 				}
-
 			}
 			window.addEventListener('resize', resize)
 			resize()

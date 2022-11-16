@@ -80,15 +80,15 @@ export default (props) => {
             <TextArea reference={text} onChange={updateNote} placeholder={props.add ? "New note" : "Note"} value={props.text}></TextArea>
             <div className='flex justify-end gap-4'>
                 <Icon onClick={copyText} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="clarity:copy-line"></Icon>
-                <div>
+                <div className='relative'>
                     <Icon onClick={() => setShowTextPalette(!showTextPalette)} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="ic:round-format-color-text"></Icon>
-                    {showTextPalette && <div className='absolute z-10 left-0 top-0 aspect-square'>
+                    {showTextPalette && <div className='mt-6 absolute z-10 right-0 top-0 aspect-square'>
                         <HexColorPicker color={textColor} onChange={updateTextColor} />
                     </div>}
                 </div>
-                <div>
+                <div className='relative'>
                     <Icon onClick={() => setShowBgPalette(!showBgPalette)} className='cursor-pointer text-lg md:text-md opacity-50 hover:opacity-100' icon="carbon:color-palette"></Icon>
-                    {showBgPalette && <div className='absolute z-10 left-0 top-0 aspect-square'>
+                    {showBgPalette && <div className='mt-6 absolute z-10 right-0 top-0 aspect-square'>
                         <HexColorPicker color={bgColor} onChange={updateBgColor} />
                     </div>}
                 </div>
