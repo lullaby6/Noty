@@ -20,33 +20,32 @@ export default () => {
 		return notes
 	})
 
-	function addNote({title, text, bgColor, textColor}){
+	function addNote(note) {
+		const newNote = {
+			id: uuidv4(),
+			...note
+		}
+
         setNotes([
             ...notes,
-            {
-				id: uuidv4(),
-				title,
-				text,
-				bgColor,
-				textColor
-			}
+            newNote
         ])
     }
 
 	function removeNote(id){
-		setNotes([...notes.filter(note => note.id !== id)])
+		setNotes(notes.filter(note => note.id !== id))
 	}
 
 	function updateNote(updateNoteProps){
-		const index = notes.findIndex(note => note.id === updateNoteProps.id)
+		const updateNoteIndex = notes.findIndex(note => note.id === updateNoteProps.id)
 		let updatedNotes = [...notes]
-		updatedNotes[index] = updateNoteProps
+		updatedNotes[updateNoteIndex] = updateNoteProps
 		setNotes(updatedNotes)
 	}
 
 	useEffect(() => {
 		localStorage.setItem('noty', JSON.stringify({notes}))
-	});
+	})
 
 	return (
 		<main className="min-h-screen text-gray-700 dark:bg-neutral-800 dark:text-neutral-300">

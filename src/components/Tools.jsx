@@ -21,9 +21,7 @@ export default ({setNotes}) => {
         const noty = JSON.parse(event.target.result)
         try {
             if('notes' in noty) setNotes(noty.notes)
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (error) {}
     }
 
     function importJson(e){

@@ -18,7 +18,7 @@ export default () => {
             if(window.matchMedia('(prefers-color-scheme: dark)').matches) changeTheme('dark')
         }
         else if(LSTheme === 'dark') changeTheme('dark')
-    })
+    }, [])
 
     return (
         <div className='flex gap border border-gray-300 dark:border-neutral-700 rounded-full justify-center items-center py-1 px-2 text-2xl'>
