@@ -52,14 +52,14 @@ export default () => {
 			window.removeEventListener('resize', resize)
 			function resize(){
 				const width = window.innerWidth
-				if(width >= 1024){
-					return setColumns(4)
-				}else if(width >= 768){
-					return setColumns(3)
-				}else if(width >= 480){
-					return setColumns(2)
-				}else{
+				if(width <= 480){
 					return setColumns(1)
+				}else if(width <= 768){
+					return setColumns(2)
+				}else if(width <= 1024){
+					return setColumns(3)
+				}else{
+					return setColumns(4)
 				}
 			}
 			window.addEventListener('resize', resize)
