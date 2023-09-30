@@ -22,6 +22,14 @@ export default function App() {
 		setNotes([...notes, {...formProps, id: uuidv4()}])
 	}
 
+	function updateNote(id, title, text){
+		console.log({id, title, text});
+		const updateNoteIndex = notes.findIndex(note => note.id === id)
+		let updatedNotes = [...notes]
+		updatedNotes[updateNoteIndex] = {id, title, text}
+		setNotes(updatedNotes)
+	}
+
 	function removeNote(id){
 		setNotes(notes.filter(note => note.id !== id))
 	}
@@ -37,8 +45,8 @@ export default function App() {
 				{search.trim() === '' && <NewNote addNote={addNote}/>}
 				{notes.map(note => (
 					search.trim() === ''
-					? <Note key={note.id} {...note} removeNote={removeNote}/>
-					: (note.title.toLowerCase().includes(search.toLowerCase()) || note.text.toLowerCase().includes(search.toLowerCase())) && <Note key={note.id} {...note} removeNote={removeNote}/>
+					? <Note updateNote={updateNote} key={note.id} {...note} removeNote={removeNote}/>
+					: (note.title.toLowerCase().includes(search.toLowerCase()) || note.text.toLowerCase().includes(search.toLowerCase())) && <Note updateNote={updateNote} key={note.id} {...note} removeNote={removeNote}/>
 				))}
 			</div>
 		</main>
