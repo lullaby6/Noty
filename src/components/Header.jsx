@@ -1,6 +1,6 @@
 import { useState } from "react"
-
 import { Icon } from '@iconify/react';
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function ({setNotes, setSearch}){
     const showClearInput = useState(false)
@@ -15,7 +15,7 @@ export default function ({setNotes, setSearch}){
                 </div>
                 <input onChange={e => setSearch(e.target.value)} type="text" placeholder="Search note..." spellCheck="false" autoComplete="off" className="bg-transparent dark:placeholder:text-neutral-800 focus:outline-none placeholder:italic dark:text-white text-neutral-800 text-xl w-full pl-2 p-1"/>
             </div>
-            {/* <ThemeSwitcher></ThemeSwitcher> */}
+            <ThemeSwitcher></ThemeSwitcher>
         </header>
     )
 }
