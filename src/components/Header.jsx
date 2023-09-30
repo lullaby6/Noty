@@ -26,7 +26,7 @@ export default function ({setNotes, setSearch}){
     }
 
     return (
-        <header className="flex items-center shadow-md border dark:border-neutral-800 border-b-neutral-300 gap-2 p-2 sticky top-0 left-0 w-full bg-white dark:bg-neutral-900">
+        <header className="flex items-center shadow-md border dark:border-neutral-800 border-b-neutral-300 gap-2 p-2 sticky top-0 left-0 w-full bg-white dark:bg-neutral-900 z-[100]">
             <div className="relative flex justify-center items-center border dark:focus-within:border-neutral-700 border-neutral-300 focus-withi:border-neutral-400 dark:border-neutral-800 rounded overflow-hidden w-full">
                 <div onClick={handleClearSearch} className={"dark:bg-neutral-800 h-9 pl-2 pr-2 bg-neutral-100 " + (showClearInput && "cursor-pointer")}>
                     {showClearInput
