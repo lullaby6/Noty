@@ -7,7 +7,11 @@ import Note from "./components/Note"
 import NewNote from "./components/NewNote"
 
 export default function App() {
-	const [notes, setNotes] = useState([])
+	const [notes, setNotes] = useState(() =>
+		'notes' in localStorage
+			? JSON.parse(localStorage.notes)
+			: []
+	)
 	const [search, setSearch] = useState('')
 
 	function addNote(e, clearForm){
@@ -21,6 +25,10 @@ export default function App() {
 	function removeNote(id){
 		setNotes(notes.filter(note => note.id !== id))
 	}
+
+	useEffect(() => {
+		localStorage.notes = JSON.stringify(notes)
+	}, [notes])
 
 	return (
 		<main className="bg-white dark:bg-neutral-900 min-h-screen flex flex-col">
