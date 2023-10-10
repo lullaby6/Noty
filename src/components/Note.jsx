@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 import { useRef } from "react"
 import { Fade } from "react-awesome-reveal";
 
-export default function Note({id, title, text, removeNote, updateNote, modalRef}){
+export default function Note({id, title, text, removeNote, updateNote, modalRef, openModal, setModalId}){
     const noteRef = useRef(null)
     const titleRef = useRef(null)
     const textRef = useRef(null)
@@ -25,10 +25,6 @@ export default function Note({id, title, text, removeNote, updateNote, modalRef}
         }, removeNoteAnimationDuration)
     }
 
-    function openModal(){
-        modalRef.current.openModal(id, titleRef.current.value, textRef.current.value)
-    }
-
     return (
         <Fade duration={500}>
             <div>
@@ -39,7 +35,7 @@ export default function Note({id, title, text, removeNote, updateNote, modalRef}
                         <button onClick={() => {removeNoteAnimation == null && removeNoteAnimationHandle()}} className='focus:outline-none'>
                             <Icon className="text-2xl dark:text-white text-neutral-800 dark:opacity-10 dark:hover:opacity-100 opacity-50 hover:opacity-100 cursor-pointer" icon="material-symbols:delete-outline" />
                         </button>
-                        <button onClick={openModal} className='focus:outline-none'>
+                        <button onClick={() => openModal(id, titleRef.current.value, textRef.current.value)} className='focus:outline-none'>
                             <Icon className="text-2xl dark:text-white text-neutral-800 dark:opacity-10 dark:hover:opacity-100 opacity-50 hover:opacity-100 cursor-pointer" icon="material-symbols:fullscreen" />
                         </button>
                     </div>
