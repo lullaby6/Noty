@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Header from "./components/Header"
 import Note from "./components/Note"
 import NewNote from "./components/NewNote"
+import Modal from "./components/Modal"
 
 export default function App() {
 	const [notes, setNotes] = useState(() =>
@@ -13,6 +14,7 @@ export default function App() {
 			: []
 	)
 	const [search, setSearch] = useState('')
+	const modalRef = useRef(null)
 
 	function addNote(e, clearForm){
 		e.preventDefault()
@@ -40,13 +42,14 @@ export default function App() {
 
 	return (
 		<main className="bg-white dark:bg-neutral-900 min-h-screen flex flex-col">
+			<Modal modalRef={modalRef} updateNote={updateNote}></Modal>
 			<Header setNotes={setNotes} setSearch={setSearch}></Header>
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 max-h-screen overflow-y-scroll scrollbar-thin dark:scrollbar-thumb-neutral-600 scrollbar-thumb-neutral-300 scrollbar-track-transparent">
 				{search.trim() === '' && <NewNote addNote={addNote}/>}
 				{notes.map(note => (
 					search.trim() === ''
-					? <Note updateNote={updateNote} key={note.id} {...note} removeNote={removeNote}/>
-					: (note.title.toLowerCase().includes(search.toLowerCase()) || note.text.toLowerCase().includes(search.toLowerCase())) && <Note updateNote={updateNote} key={note.id} {...note} removeNote={removeNote}/>
+					? <Note updateNote={updateNote} key={note.id} {...note} removeNote={removeNote} modalRef={modalRef}/>
+					: (note.title.toLowerCase().includes(search.toLowerCase()) || note.text.toLowerCase().includes(search.toLowerCase())) && <Note updateNote={updateNote} key={note.id} {...note} removeNote={removeNote} modalRef={modalRef}/>
 				))}
 			</div>
 		</main>

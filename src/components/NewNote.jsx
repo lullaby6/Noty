@@ -15,7 +15,7 @@ export default function ({addNote}){
             <input ref={titleElement} type="text" name='title' placeholder="Title..." spellCheck="false" autoComplete="off" className="bg-transparent dark:placeholder:text-neutral-800 dark:text-white placeholder:italic text-xl text-neutral-800 focus:outline-none font-semibold" />
             <textarea ref={descElement} rows="7" name='text' placeholder="Text..." spellCheck="false" autoComplete="off" className="bg-transparent dark:placeholder:text-neutral-800 dark:text-white placeholder:italic text-lg text-neutral-800 focus:outline-none resize-none scrollbar-thin dark:scrollbar-thumb-neutral-700 scrollbar-thumb-neutral-400 scrollbar-track-transparent"></textarea>
             <div className="flex justify-end">
-                <button>
+                <button className='focus:outline-none'>
                     <Icon icon="tabler:arrow-up" rotate={2} className="text-2xl dark:text-white text-neutral-800 dark:opacity-10 dark:hover:opacity-100 opacity-50 hover:opacity-100 cursor-pointer"/>
                 </button>
             </div>
